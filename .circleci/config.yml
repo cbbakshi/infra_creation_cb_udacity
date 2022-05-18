@@ -14,24 +14,8 @@ jobs:
 #        - checkout # check out the code in the project directory
 #        - run: echo "hello world" # run the `echo` command
 #
-  # Exercise: Config and Deployment
-  configure_infrastructure: 
-    docker:
-      - image: python:3.7-alpine3.11
-    steps:
-      - checkout
-      - add_ssh_keys:
-          fingerprints: ["26:f2:08:77:d2:23:83:21:03:33:f6:72:38:11:42:fa"] # You can get this ID in the section where you registered the SSH Key
-      - run:
-          name: Install dependencies
-          command: |
-            # install the dependencies needed for your playbook
-            apk add --update ansible 
-      - run:
-          name: Configure server
-          command: |
-            ansible-playbook -i inventory.txt main4.yml
-  # Exercise: Smoke Testing
+
+# Exercise: Smoke Testing
   smoke_test:
   docker:
     - image: alpine:latest
@@ -53,6 +37,5 @@ jobs:
 workflows:
   my_workflow:
       jobs:
-        #- configure_infrastructure
         - smoke_test
         
